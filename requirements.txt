@@ -1,0 +1,8 @@
+PyQt5==5.15.10
+numpy
+opencv-python
+scikit-learn
+jieba
+pandas
+matplotlib
+pillow
