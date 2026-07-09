@@ -1,12 +1,14 @@
 import numpy as np
+import matplotlib
+# 新增：使用纯离线非交互式后端，不创建Qt窗口
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from wordcloud import WordCloud
 import jieba
 import os
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 使用黑体显示中文
-plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
-
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 def plot_text_clusters(tfidf_matrix, labels, feature_names, output_dir="./results", n_components=2, top_n=20):
     """
     可视化文本聚类结果：PCA降维散点图 + 词云图

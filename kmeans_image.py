@@ -1,11 +1,14 @@
 import numpy as np
+
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 import cv2
 import os
 from preprocessing import DataPreprocessor
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-
 
 def kmeans_image_segmentation(input_path, output_dir="./results", k_values=[3, 5, 8]):
     """
