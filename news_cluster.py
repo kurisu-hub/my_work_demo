@@ -101,10 +101,8 @@ class NewsCluster:
         joblib.dump(self.vectorizer, os.path.join(output_dir, "tfidf_vectorizer.pkl"))
         print(f"向量化数据已保存至 {output_dir}")
 
-    def dbscan_news(self, tfidf_matrix=None, feature_names=None, eps=0.9, min_samples=5):
-        """
-        使用DBSCAN对新闻文本进行聚类
-        """
+    def dbscan_news(self, tfidf_matrix=None, feature_names=None, eps=0.5, min_samples=10):
+        """ 使用DBSCAN对新闻文本进行聚类 """
         if tfidf_matrix is None:
             if self.tfidf_matrix is None:
                 raise ValueError("请先调用vectorize_news完成文本向量化")
@@ -115,24 +113,19 @@ class NewsCluster:
             feature_names = self.feature_names
 
         print(f"开始DBSCAN新闻聚类，eps={eps}, min_samples={min_samples}...")
-
         dbscan = DBSCAN(eps=eps, min_samples=min_samples, n_jobs=-1)
         labels = dbscan.fit_predict(tfidf_matrix)
-
         unique_labels = set(labels)
         n_clusters = len(unique_labels) - (1 if -1 in labels else 0)
         n_noise = list(labels).count(-1)
         noise_ratio = n_noise / len(labels) * 100
-
         print(f"聚类结果：簇数量={n_clusters}, 噪声比例={noise_ratio:.2f}%")
 
         # 提取每个簇的Top 10关键词（忽略噪声点）
         keywords_dict = self.get_top_keywords(tfidf_matrix, feature_names, labels)
-
         self.labels = labels
         self.keywords_dict = keywords_dict
         self.noise_ratio = noise_ratio
-
         return labels, noise_ratio, keywords_dict
 
     def get_top_keywords(self, tfidf_matrix, feature_names, labels):
