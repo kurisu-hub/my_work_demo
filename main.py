@@ -155,7 +155,7 @@ def alg_kmeans_text(news_path, k=5):
         score_str = "N/A"
 
     # 提取关键词
-    keywords_dict = cluster._get_top_keywords(tfidf, feature_names, labels, top_n=10)
+    keywords_dict = cluster.get_top_keywords(tfidf, feature_names, labels)
 
     # PCA 可视化 + 词云
     try:

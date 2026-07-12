@@ -92,12 +92,12 @@ class NewsCluster:
         print(f"K={k} 时的轮廓系数: {score:.4f}")
 
         # 提取每个簇的Top 10关键词
-        keywords_dict = self.get_top_keywords(tfidf_matrix, feature_names, labels, k)
+        keywords_dict = self._get_top_keywords(tfidf_matrix, feature_names, labels, k)
         np.save("./results/labels_kmeans.npy", labels)
         print("簇标签已保存至 ./results/labels_kmeans.npy")
         return labels, score, keywords_dict
 
-    def get_top_keywords(self, tfidf_matrix, feature_names, labels, k):
+    def _get_top_keywords(self, tfidf_matrix, feature_names, labels, k):
         """
         获取每个簇的Top 10关键词
         :param tfidf_matrix: TF-IDF矩阵
