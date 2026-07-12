@@ -1,0 +1,15 @@
+# Python缓存文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+# 打包产物
+build/
+dist/
+*.exe
+*.pkg
+# 运行生成的矩阵、图片
+results/
+# IDE、虚拟环境
+.idea/
+venv/
