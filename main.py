@@ -336,7 +336,7 @@ class MainWindow(QMainWindow):
             item = self.results_layout.takeAt(0)
             widget = item.widget()
             if widget:
-                widget.deleteLater()
+                widget.deleteLater() 
 
     def run_image_segmentation(self):
         if self.is_running:
